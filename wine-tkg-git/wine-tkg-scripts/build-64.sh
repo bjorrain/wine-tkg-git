@@ -1,8 +1,8 @@
 _exports_64() {
   if [ "$_NOCCACHE" != "true" ]; then
 	if [ -e /usr/bin/ccache ]; then
-		export CC="ccache clang -m64" && echo "CC = ${CC}" >>"$_LAST_BUILD_CONFIG"
-		export CXX="ccache clang++ --enable-win64" && echo "CXX = ${CXX}" >>"$_LAST_BUILD_CONFIG"
+		export CC="ccache clang" && echo "CC = ${CC}" >>"$_LAST_BUILD_CONFIG"
+		export CXX="ccache clang++ " && echo "CXX = ${CXX}" >>"$_LAST_BUILD_CONFIG"
 	fi
 	if [ -e /usr/bin/ccache ] && [ "$_NOMINGW" != "true" ]; then
 		export CROSSCC="ccache x86_64-w64-mingw32-gcc" && echo "CROSSCC64 = ${CROSSCC}" >>"$_LAST_BUILD_CONFIG"
@@ -35,6 +35,7 @@ _configure_64() {
       ../"${_winesrcdir}"/configure \
 	    --prefix="$_prefix" \
 		--enable-archs=i386,x86_64 \
+    --enable-win64 \
 		"${_configure_args64[@]}" \
 		"${_configure_args[@]}"
     fi
